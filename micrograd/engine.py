@@ -1,14 +1,15 @@
 
 class Value:
     """ stores a single scalar value and its gradient """
+    """Value 是 micrograd 提供的一个自动微分标量类："""
 
     def __init__(self, data, _children=(), _op=''):
-        self.data = data
-        self.grad = 0
+        self.data = data  # 当前节点的值（标量或张量）
+        self.grad = 0     # 梯度初始化为 0
         # internal variables used for autograd graph construction
-        self._backward = lambda: None
-        self._prev = set(_children)
-        self._op = _op # the op that produced this node, for graphviz / debugging / etc
+        self._backward = lambda: None  # 反向传播函数（默认空操作）
+        self._prev = set(_children)    # 子节点集合（依赖的父节点）
+        self._op = _op                 # 操作符（如 "+", "*" 等，用于可视化/调试）
 
     def __add__(self, other):
         other = other if isinstance(other, Value) else Value(other)
