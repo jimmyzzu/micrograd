@@ -25,6 +25,8 @@ def test_sanity_check():
     # backward pass went well
     assert xmg.grad == xpt.grad.item()
 
+    print(f">>>test_sanity_check end!!!<<<")
+
 def test_more_ops():
 
     a = Value(-4.0)
@@ -65,3 +67,12 @@ def test_more_ops():
     # backward pass went well
     assert abs(amg.grad - apt.grad.item()) < tol
     assert abs(bmg.grad - bpt.grad.item()) < tol
+
+    print(f">>>test_more_ops end!!!<<<")
+    
+def main():
+    test_sanity_check()
+    test_more_ops()
+
+if __name__ == "__main__":
+    main()  
